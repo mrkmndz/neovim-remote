@@ -31,7 +31,7 @@ import textwrap
 import time
 import traceback
 
-import psutil
+# import psutil
 import pynvim
 
 class Nvr():
@@ -360,31 +360,11 @@ def print_versions():
     import pkg_resources
     print('nvr {}'.format(pkg_resources.require('neovim-remote')[0].version))
     print('pynvim {}'.format(pkg_resources.require('pynvim')[0].version))
-    print('psutil {}'.format(pkg_resources.require('psutil')[0].version))
+    # print('psutil {}'.format(pkg_resources.require('psutil')[0].version))
     print('Python {}'.format(sys.version.split('\n')[0]))
 
-
 def print_addresses():
-    addresses = []
-    errors = []
-
-    for proc in psutil.process_iter(attrs=['name']):
-        if proc.info['name'] == 'nvim':
-            try:
-                for conn in proc.connections('inet4'):
-                    addresses.insert(0, ':'.join(map(str, conn.laddr)))
-                for conn in proc.connections('inet6'):
-                    addresses.insert(0, ':'.join(map(str, conn.laddr)))
-                for conn in proc.connections('unix'):
-                    if conn.laddr:
-                        addresses.insert(0, conn.laddr)
-            except psutil.AccessDenied:
-                errors.insert(0, 'Access denied for nvim ({})'.format(proc.pid))
-
-    for addr in sorted(addresses):
-        print(addr)
-    for error in sorted(errors):
-        print(error, file=sys.stderr)
+    print ("No can do, sorry boss")
 
 
 def parse_address(address):
